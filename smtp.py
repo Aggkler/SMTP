@@ -5,10 +5,8 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 
-BASE_DIR = 'Protocols'
-
 config = {}
-with open(os.path.join(BASE_DIR, 'config.txt'), encoding='utf-8') as f:
+with open('config.txt', encoding='utf-8') as f:
     for line in f:
         if ':' in line:
             key, value = line.strip().split(':', 1)
@@ -30,7 +28,7 @@ msg['Subject'] = subject
 msg.attach(MIMEText(message_body, 'plain', 'utf-8'))
 
 for filename in attachments:
-    filepath = os.path.join(BASE_DIR, filename)
+    filepath = os.path.join(filename)
     if os.path.isfile(filepath):
         with open(filepath, 'rb') as f:
             part = MIMEBase('application', 'octet-stream')
